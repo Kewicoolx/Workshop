@@ -1,0 +1,24 @@
+inp=int(input("enter a number to check if it's a perfect number: "))
+# a perfect number is a positive integer equal to the sum of all its proper divisors
+# for example 6 = 3 + 2 + 1 thus, 6 is a perfect number
+summ=0
+i=1
+flag= True
+if inp>0:
+    while inp !=0 and i<(inp/2)+1:
+        if (inp%i)==0:
+            summ = summ + i
+        i+=1
+elif inp<0:
+    print("the number is negative")
+    flag = False
+else:
+    print("Zero is not a perfect integer")
+    flag = False
+
+if summ==inp and inp!=0:
+    print("it's a perfect number")
+else:
+    print("The number is not perfect")
+    if flag:
+        print("the sum of its divisors is ",summ)
