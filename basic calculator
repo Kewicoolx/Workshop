@@ -1,0 +1,72 @@
+import javax.swing.*;
+import java.util.Scanner;
+public class Calculator {
+	JFrame window = new JFrame();
+	JLabel label = new JLabel();
+	JPanel panel = new JPanel();
+
+	// to insure the input is a valid operation
+	public static boolean isOperation(char x){
+		switch(x){
+			case '+': case'-': case'*':case'/':case'%':case'^': return true;
+			default:return false;
+		}
+	}
+	//figure if input is a number or not
+	public static boolean numsOrElse(String s){
+	if (s.length() ==0) return true;
+	return "0123456789".contains(s.charAt(0) +"") && numsOrElse(s.substring(1));
+
+	}
+	// do the arithmetic operation
+	public static void doOperation(double in1,char op,double in2){
+		switch(op){
+			case'+' :System.out.println(in1+in2);return;
+			case'-' :System.out.println(in1-in2);return;
+			case'*' :System.out.println(in1*in2);return;
+			case'/' :System.out.println(in1/in2);return;
+			case'^' :System.out.println(Math.pow(in1,in2));return;
+			case'%' :System.out.println(in1%in2);return;
+			default :System.out.println("This case will NEVER be reached in this code");
+		}
+	}
+//------------------------------------Main------------------------------------------------
+	public static void main (String[]args){
+		Scanner sc = new Scanner(System.in);
+		double inp1 =0;double inp2 =0;char operator;String inpStr ="";
+		boolean numEntered = false;
+
+		do{ System.out.println("enter a whole number then enter the operation");
+			inpStr = sc.next();
+		if (inpStr.length()>0){
+
+			if (!numEntered && numsOrElse(inpStr)){
+			inp1 = Integer.parseInt(inpStr);
+			numEntered = true;
+			}
+				else if(inpStr.length() ==1 && isOperation(inpStr.charAt(0))){
+				operator = inpStr.charAt(0);
+				if(numEntered)break;}
+				else continue;
+
+
+		}
+		else continue;
+
+		}while(true);
+		do{
+			System.out.println("enter another whole number");
+			inpStr = sc.next();
+			if (inpStr.length()>0){
+
+				if (numsOrElse(inpStr)){
+				inp2 = Integer.parseInt(inpStr);
+				break;}
+			else continue;
+
+			}else continue;}while(true);
+
+		System.out.println("the result is");
+		doOperation(inp1,operator,inp2);
+	}}
+	//Next step in the calculator is to use interface GUI (swing package)
